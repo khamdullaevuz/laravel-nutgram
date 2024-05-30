@@ -27,7 +27,8 @@ $bot->onCommand('start', function (Nutgram $bot) {
         ->addRow(
             KeyboardButton::make(
                 text: 'Xabar qoldirish'
-            ),
+            )
+        )->addRow(
             KeyboardButton::make(
                 text: 'Menu',
                 web_app: new WebAppInfo(
