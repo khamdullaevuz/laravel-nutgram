@@ -1,11 +1,9 @@
 <?php
 /** @var SergiX44\Nutgram\Nutgram $bot */
 
-use App\Conversations\WriteToAdminConversation;
+use App\Telegram\Commands\StartCommand;
+use App\Telegram\Conversations\WriteToAdminConversation;
 use SergiX44\Nutgram\Nutgram;
-use SergiX44\Nutgram\Telegram\Types\Keyboard\KeyboardButton;
-use SergiX44\Nutgram\Telegram\Types\Keyboard\ReplyKeyboardMarkup;
-use SergiX44\Nutgram\Telegram\Types\WebApp\WebAppInfo;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,27 +15,7 @@ use SergiX44\Nutgram\Telegram\Types\WebApp\WebAppInfo;
 |
 */
 
-$bot->onCommand('start', function (Nutgram $bot) {
-    $firstName = $bot->user()->first_name;
-    $bot->sendMessage(
-        text: 'Assalomu alaykum ' . $firstName,
-        reply_markup: ReplyKeyboardMarkup::make(
-            resize_keyboard: true
-        )
-        ->addRow(
-            KeyboardButton::make(
-                text: 'Xabar qoldirish'
-            )
-        )->addRow(
-            KeyboardButton::make(
-                text: 'Menu',
-                web_app: new WebAppInfo(
-                    url: 'https://google.com'
-                )
-            )
-        )
-    );
-});
+$bot->onCommand('start', StartCommand::class);
 
 $bot->onText('Xabar qoldirish', function (Nutgram $bot) {
     WriteToAdminConversation::begin($bot);
