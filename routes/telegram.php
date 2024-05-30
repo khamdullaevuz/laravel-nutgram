@@ -5,6 +5,7 @@ use App\Conversations\WriteToAdminConversation;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\KeyboardButton;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\ReplyKeyboardMarkup;
+use SergiX44\Nutgram\Telegram\Types\WebApp\WebAppInfo;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,15 @@ $bot->onCommand('start', function (Nutgram $bot) {
             resize_keyboard: true
         )
         ->addRow(
-            KeyboardButton::make('Xabar qoldirish')
+            KeyboardButton::make(
+                text: 'Xabar qoldirish'
+            ),
+            KeyboardButton::make(
+                text: 'Menu',
+                web_app: new WebAppInfo(
+                    url: 'https://google.com'
+                )
+            )
         )
     );
 });
